@@ -20,26 +20,27 @@
   <dd>
     2 months ago
   </dd>
+  <% if @photo.owner_id == session.fetch(:user_id) %>
+    <dt>Edit photo</dt>
+    <dd>
+      <form action="/update_photo/<%= @photo.id %>">
+        <label for="browser_image">Image</label>
+        <input id="browser_image" type="text" name="input_image" placeholder="Enter a URL for the image..." value="<%= @photo.image %>">
 
-  <dt>Edit photo</dt>
-  <dd>
-    <form action="/update_photo/<%= @photo.id %>">
-      <label for="browser_image">Image</label>
-      <input id="browser_image" type="text" name="input_image" placeholder="Enter a URL for the image..." value="<%= @photo.image %>">
+        <label for="browser_caption">Caption</label>
+        <textarea id="browser_caption" name="input_caption" placeholder="Enter a caption for the photo..."><%= @photo.caption %></textarea>
 
-      <label for="browser_caption">Caption</label>
-      <textarea id="browser_caption" name="input_caption" placeholder="Enter a caption for the photo..."><%= @photo.caption %></textarea>
+        <button>Update photo</button>
+      </form>
+    </dd>
 
-      <button>Update photo</button>
-    </form>
-  </dd>
-
-  <dt>Delete photo</dt>
-  <dd>
-    <a href="/delete_photo/<%= @photo.id %>;">
-      Delete this photo
-    </a>
-  </dd>
+    <dt>Delete photo</dt>
+    <dd>
+      <a href="/delete_photo/<%= @photo.id %>;">
+        Delete this photo
+      </a>
+    </dd>
+  <% end %>
 </dl>
 
 <h2>Comments</h2>
